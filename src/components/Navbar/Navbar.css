@@ -1,0 +1,27 @@
+.navbarWrapper{
+    display: flex;
+    justify-content: space-between;
+    /* height: 150px; */
+}
+
+.netflixAndNavigation{
+    display: flex;
+    justify-content: center;
+}
+
+.navbarWrapper__img{
+    width: 130px;
+    height: 50px;
+    text-decoration: none;
+    
+}
+
+.navPanel{
+    display: flex;
+    /* justify-content: ; */
+}
+
+.avatar {
+    width: 50px;
+    /* height: 60vh; */
+}

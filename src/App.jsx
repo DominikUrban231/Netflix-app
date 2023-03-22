@@ -1,0 +1,68 @@
+import React, { createContext } from 'react'
+import Navbar from './components/Navbar/Navbar'
+import RandomMovie from './components/RandomMovie/RandomMovie'
+import MovieList from './components/MovieList/MovieList'
+import logo from './logo.svg'
+import useMoviesData from './data/Api';
+import styled, { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: Grey;
+  }
+`
+const All = styled.div`
+  position: relative; 
+`
+
+export const MovieContext = createContext([]);
+
+const App = () => {
+
+  const [moviesLibrary, isLoaded, error, favoriteLibrary] = useMoviesData()
+
+  if (error) {
+    return (
+      <div>Error: {error}</div>
+    )
+  }
+  else if (!isLoaded) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Loading... Please Wait...
+          </p>
+        </header>
+      </div>
+    )
+  }
+  else if (moviesLibrary && isLoaded) {
+    return (
+      <>
+        <MovieContext.Provider value={[moviesLibrary, favoriteLibrary]}>
+          <All>
+            <Navbar />
+            <RandomMovie />
+            <MovieList
+              type={"Action & Adventure"}
+            />
+            <MovieList
+              type={"Drama"}
+            />
+            <MovieList
+              type={"Comedy"}
+            />
+            <MovieList
+              type={"Favorite"}
+            />
+            <GlobalStyle/>
+          </All>
+        </MovieContext.Provider>
+      </> 
+    )
+  }
+}
+export default App
+
