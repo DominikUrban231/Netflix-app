@@ -4,7 +4,7 @@ import play from '../../assets/play.svg'
 import { MovieContext } from "../../App";
 import styled from "styled-components";
 import Info from "../MovieList/Movie/InfoComponent/Info";
-import avatar from "../../assets/moviesWallpaper/avatar.jpg"
+import avatar from "../../assets/moviesWallpaper/avatar.jpg";
 import creed_3 from "../../assets/moviesWallpaper/creed_3.jpg"
 import otto from '../../assets/moviesWallpaper/man_called_otto.jpg'
 import plane from '../../assets/moviesWallpaper/plane.jpg'
@@ -18,12 +18,12 @@ const RandomMovie = styled.div`
 `
 const Background = styled.img`
     height: 100vh;
-    width: 100vw;
-    // box-shadow: 30px 30px  black inset;
+    width: auto;
+    box-shadow: 30px 30px  black inset;
 `
 const MovieInfo = styled.div`
     position: absolute; 
-    top: 20%;
+    top: 30%;
     left: 50px;
     color: White;
 `
@@ -94,10 +94,12 @@ const RandomMovieWrapper = (props) => {
     return (
         <All>
             {randomMovie && randomMovie["im:image"]
-            &&
+            && creed_3 &&
             <RandomMovie>
-                <Background src={randomMovie.wallpaper} alt={"zdjęcie filmu"}/>
-                <Background />
+                {/* <Background src={randomMovie.wallpaper} alt={"zdjęcie filmu"}/> */}
+                <Background src={creed_3} alt={"zdjęcie filmu"}/>
+
+                {/* <Background /> */}
                 <MovieInfo>
                     <NFilm>
                         <N>N</N>
