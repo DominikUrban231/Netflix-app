@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = styled.button`
+const Button = styled.div`
     display: flex;
-    // width: 155px;
     height: 45px;
+    background-color: White;
+    color: Black;
     border-radius: 8px;
+    margin-right: 10px;
     align-items: center;
     img {
         display: flex;
@@ -14,6 +16,7 @@ const Button = styled.button`
     span {
         display: flex;
         font-size: 150%;
+        padding-inline: 10px;
     }
 `
 

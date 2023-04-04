@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import heartPlus from '../../../../assets/heartPlus.svg'
+import heartMinus from '../../../../assets/heartMinus.svg'
 
-const Img = styled.svg`
-    path {
-        fill:
-    }
+const StyledHeart = styled.img`
+background-color: White;
+border-radius: 8px;
+cursor: pointer;
+height: 5px;
+// width: 45px;
 `
-
-const Heart = (props) => (
-    // const onClickImage = () => {}
-    //save to localStorage
-    //removeFromLocalStorage
-    <img onClick={props.onClickHeart} src={heartPlus} alt={"polób film"}/>
-)
+const Heart = (props) => {
+    return (
+        <StyledHeart onClick={props.onClickHeart} src={heartPlus} alt={"polub film"}/>
+    )
+}
 
 export default Heart

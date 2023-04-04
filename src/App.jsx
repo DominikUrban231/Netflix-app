@@ -8,11 +8,16 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: Grey;
+    background-color: rgb(20, 20, 20);
   }
 `
 const All = styled.div`
   position: relative; 
+`
+const AllMovieLists = styled.div`
+  position: absolute;
+  top: 75vh;
+  // background-color: black;
 `
 
 export const MovieContext = createContext([]);
@@ -26,7 +31,7 @@ const App = () => {
       <div>Error: {error}</div>
     )
   }
-  else if (!isLoaded) {
+  else if (!moviesLibrary) {
     return (
       <div className="App">
         <header className="App-header">
@@ -44,19 +49,21 @@ const App = () => {
         <MovieContext.Provider value={[moviesLibrary, favoriteLibrary]}>
           <All>
             <Navbar />
-            <RandomMovie />
-            <MovieList
-              type={"Action & Adventure"}
-            />
-            <MovieList
-              type={"Drama"}
-            />
-            <MovieList
-              type={"Comedy"}
-            />
-            <MovieList
-              type={"Favorite"}
-            />
+            <RandomMovie/>
+            <AllMovieLists>
+              <MovieList
+                type={"Action & Adventure"}
+              />
+              <MovieList
+                type={"Drama"}
+              />
+              <MovieList
+                type={"Comedy"}
+              />
+              <MovieList
+                type={"Favorite"}
+              />
+            </AllMovieLists>
             <GlobalStyle/>
           </All>
         </MovieContext.Provider>

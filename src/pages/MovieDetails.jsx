@@ -38,7 +38,6 @@ const MovieDetails = () => {
                 <div>
                     <Img src={selectedMovie["im:image"][2].label} alt="Obraz filmu"/>
                     <div>
-                        <p>N film</p>
                         <h1>{selectedMovie["im:name"].label}</h1>
                         <div>
                             <button>Play</button>
