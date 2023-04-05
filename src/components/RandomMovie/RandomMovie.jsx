@@ -10,16 +10,16 @@ import otto from '../../assets/moviesWallpaper/man_called_otto.jpg'
 import plane from '../../assets/moviesWallpaper/plane.jpg'
 
 const All = styled.div`
-    background-color: rgb(20, 20, 20);
-    z-index: 0;
 `
 const RandomMovie = styled.div`
     position: relative;
 `
 const Background = styled.img`
     height: 100vh;
-    width: auto;
-    box-shadow: 30px 30px  black inset;
+    width: 100%;
+    background-image: url(${avatar})};
+    background-size: cover;
+    background-position: center;
 `
 const MovieInfo = styled.div`
     position: absolute; 
@@ -50,12 +50,12 @@ const NFilm = styled.div`
 const Buttons = styled.div`
     display: flex;
 `
-const LowerGradient = styled.div`
+const StyledLowerGradient = styled.div`
     position: absolute;
-    bottom: 0px;
+    bottom: 30px;
     width: 100%;
     height: 80px;
-    background: linear-gradient(rgba(20, 20, 20, 0), rgba(20, 20, 20, 1));
+    // background: linear-gradient(rgba(20, 20, 20, 0), rgba(20, 20, 20, 1));
     background: color: Red:
 `
 const RandomMovieWrapper = (props) => {
@@ -94,12 +94,11 @@ const RandomMovieWrapper = (props) => {
     return (
         <All>
             {randomMovie && randomMovie["im:image"]
-            && creed_3 &&
+            &&
             <RandomMovie>
                 {/* <Background src={randomMovie.wallpaper} alt={"zdjęcie filmu"}/> */}
-                <Background src={creed_3} alt={"zdjęcie filmu"}/>
-
-                {/* <Background /> */}
+                {/* <Background src={avatar} alt={"zdjęcie filmu"}/> */}
+                <Background />
                 <MovieInfo>
                     <NFilm>
                         <N>N</N>
@@ -119,7 +118,7 @@ const RandomMovieWrapper = (props) => {
                         </Buttons>
                     </div>
                 </MovieInfo>
-                <LowerGradient/>
+                <StyledLowerGradient/>
             </RandomMovie>
             }           
         </All>
