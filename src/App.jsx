@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
 const All = styled.div`
   position: relative; 
 `
-const AllMovieLists = styled.div`
+const StyledMovieLists = styled.div`
   position: absolute;
   top: 75vh;
   // background-color: black;
@@ -50,7 +50,7 @@ const App = () => {
           <All>
             <Navbar />
             <RandomMovie/>
-            <AllMovieLists>
+            <StyledMovieLists>
               <MovieList
                 type={"Action & Adventure"}
               />
@@ -63,7 +63,7 @@ const App = () => {
               <MovieList
                 type={"Favorite"}
               />
-            </AllMovieLists>
+            </StyledMovieLists>
             <GlobalStyle/>
           </All>
         </MovieContext.Provider>

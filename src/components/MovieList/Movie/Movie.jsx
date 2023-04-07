@@ -37,8 +37,7 @@ const StyledMovie = styled.div`
 
 const Movie = (props) => {
 
-    const [updatedFavoriteMovies, setUpdatedFavoriteMovies] = useState(getFromLocalStorage())
-    const [isFavorite, setIsFavorite] = useState(false) 
+    const [isFavorite, setIsFavorite] = useState(false);
 
     // const handleAddFavoriteMovie = () => {
         
@@ -57,34 +56,28 @@ const Movie = (props) => {
     //     }
     // }
 
+    useEffect(() => {
+        getFromLocalStorage() &&
+        setIsFavorite(getFromLocalStorage().includes(props.movie));
+        console.log(getFromLocalStorage())
+    }, [props.movie])
+
     const handleAddFavoriteMovie = () => {
-        console.log(isFavorite)
-        isFavorite === false ? setIsFavorite(true) : setIsFavorite(false);
-        console.log(isFavorite)
-        if(getFromLocalStorage() && isFavorite === true) {
-            setToLocalStorage(FavoriteMoviesKey, [...getFromLocalStorage(), props.movie]);
-        } else if(isFavorite === true) {
-            setToLocalStorage(FavoriteMoviesKey, [props.movie]);
-        } else if(isFavorite === false && getFromLocalStorage()) {
-            const favorites = getFromLocalStorage().filter(movie => movie.id !== props.movie.id);
-            setToLocalStorage(FavoriteMoviesKey, favorites)
-        }
+        setIsFavorite(!isFavorite);
+        
     }
 
-    // const handleAddFavoriteMovie = () => {
-    //     if (getFromLocalStorage()) {
-    //         setToLocalStorage('favoriteMovies', [...updatedFavoriteMovies, movie])
-    //     } else {
-    //         setToLocalStorage('favoriteMovies', [movie])
-    //     }
-    //     // setUpdatedFavoriteMovies(getFromLocalStorage())
-    // }
-
-    // useEffect(() => {
-    //     handleAddFavoriteMovie();
-    //     console.log(updatedFavoriteMovies);
-    // }, [updatedFavoriteMovies])
-    // console.log(props.movie.id.attributes["im:id"])
+    useEffect(() => {
+        console.log(isFavorite)
+        if(getFromLocalStorage() && isFavorite) {
+            setToLocalStorage(FavoriteMoviesKey, [...getFromLocalStorage(), props.movie]);
+        } else if(isFavorite) {
+            setToLocalStorage(FavoriteMoviesKey, [props.movie]);
+        } else if(!isFavorite && getFromLocalStorage()) {
+            const favorites = getFromLocalStorage().filter(movie => movie.id.label !== props.movie.id.label);
+            setToLocalStorage(FavoriteMoviesKey, favorites)
+        }
+    }, [isFavorite])
 
         return(
             <StyledMovie >
@@ -93,6 +86,7 @@ const Movie = (props) => {
                     <Heart 
                         // onClickHeart={props.onLiked}
                         onClickHeart={handleAddFavoriteMovie}
+                        isFavorite={isFavorite}
                     />
                     <Info 
                         movieId={props.movie && props.movie.id.attributes["im:id"]}

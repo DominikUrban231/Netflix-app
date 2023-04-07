@@ -4,24 +4,48 @@ import styled from "styled-components";
 import { RoundButton } from "../buttons/RoundButton";
 import useMoviesData from "../data/Api";
 
+const StyledAll = styled.div`
+    width: 60%;
+    padding: auto;
+    margin: auto;
+    background-color
+`
+const StyledImg = styled.div`
+    // display: flex;
+`
 const Img = styled.img`
     height: 60vh;
 `
-const Green = styled.span`
+const StyledGreen = styled.span`
     color: green;
 `
-const Border = styled.span`
+const StyledBorder = styled.span`
     border: 1px solid black;
+    margin: 5px;
 `
-const Description = styled.div`
+const StyledDescription = styled.div`
     display: flex;
-    padding: 100px;
+    // padding: 100px;
+`
+const StyledAbout = styled.div`
+    width: 50%;
+`
+const StyledCast = styled.div`
+    width: 20%;
+`
+const StyledReleaseDate = styled.div`
+    padding-right: 5px;
+`
+const StyledTechnicalInformation = styled.div`
+    display: flex;
+    align-items: center;
 `
 
 const MovieDetails = () => {
 
     const { id } = useParams();
     const [selectedMovie, setSelectedMovie] = useState();
+    const [year, setYear] = useState();
     const [moviesLibrary] = useMoviesData();
 
     useEffect(() => {
@@ -30,12 +54,19 @@ const MovieDetails = () => {
         }
     }, [id, moviesLibrary])
 
+    useEffect(() => {
+        if(selectedMovie) {
+            const date = new Date(selectedMovie["im:releaseDate"].label);
+            setYear(date.getFullYear());    
+        }
+    }, [selectedMovie])
+
     console.log(selectedMovie)
 
     if(selectedMovie) {
         return (
-            <>
-                <div>
+            <StyledAll>
+                <StyledImg>
                     <Img src={selectedMovie["im:image"][2].label} alt="Obraz filmu"/>
                     <div>
                         <h1>{selectedMovie["im:name"].label}</h1>
@@ -46,24 +77,24 @@ const MovieDetails = () => {
                             <button>głośność</button>
                         </div>
                     </div>
-                </div>
-                <Description>
-                    <div>
-                        <div>
-                            <Green>Trafność: 98%</Green>
-                            <Border>13+</Border>
-                            <span>Długość filmu</span>
+                </StyledImg>
+                <StyledDescription>
+                    <StyledAbout>
+                        <StyledTechnicalInformation>
+                            <StyledGreen>Trafność: 98%</StyledGreen>
+                            <StyledBorder>13+</StyledBorder>
+                            <StyledReleaseDate>{year}</StyledReleaseDate>
                             <span>HD</span>
-                        </div>
+                        </StyledTechnicalInformation>
                         <p>{selectedMovie.summary.label}</p>
-                    </div>
-                    <div>
+                    </StyledAbout>
+                    <StyledCast>
                         <p><span>Obsada: </span>Alexandra Breckenridge, Martin Henderson, Tim Matheson</p>
                         <p><span>Gatunki: </span>Medyczne, Romantyczne, Adaptacja ksiąek</p>
                         <p><span>Kategorie: </span>Słodko-gorzki, Osobisty, Uczuciowy</p>
-                    </div>
-                </Description>
-            </>
+                    </StyledCast>
+                </StyledDescription>
+            </StyledAll>
         )    
     }
 }

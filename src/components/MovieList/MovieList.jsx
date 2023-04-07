@@ -74,21 +74,15 @@ const MovieList = (props) => {
     const nextMovie = () => {
         setFirstMovie(firstMovie + 1)
         setLastMovie(lastMovie + 1)
-    }
-
-    // useEffect(() => {    
-    //     handleAddFavoriteMovie();
-    // }, [updatedFavoriteMovies])
-    
+    }    
 
     useEffect(() => {
         if(props.type === "Favorite") {
-            setCategoryMovies(favoriteLibrary)
+            setCategoryMovies(getFromLocalStorage("favoriteMovies"))
         } else {
             setCategoryMovies(moviesLibrary.filter(movie => movie.category.attributes.term == props.type));
 
         }
-        // console.log(categoryMovies.length)
     }, [moviesLibrary])
 
     // useEffect(() => {
@@ -118,7 +112,7 @@ const MovieList = (props) => {
         } else {
             setRightDisabled(false)
         }
-    }, [categoryMovies.length, lastMovie])
+    }, [lastMovie])
 
     // console.log(categoryMovies.length)
     // console.log("ulubione filmy", categoryMovies)
@@ -138,9 +132,9 @@ const MovieList = (props) => {
                     <button disabled={leftDisabled} onClick={previousMovie}><img src={arrowLeft} alt="left"/></button>
                     <StyledMovieList>
                         {
-                            categoryMovies.slice(firstMovie, lastMovie).map((movie, index) => (
+                            categoryMovies.slice(firstMovie, lastMovie).map((movie) => (
                                 <Movie
-                                    key={index}
+                                    key={new Date()}
                                     movie={movie}
                                     // onLiked={handleAddFavoriteMovie(movie)}
                                     // movieId={movie.id.attributes["im:id"]}

@@ -7,12 +7,12 @@ const StyledHeart = styled.img`
 background-color: White;
 border-radius: 8px;
 cursor: pointer;
-height: 5px;
-// width: 45px;
+height: 15%;
+width: auto;
 `
 const Heart = (props) => {
     return (
-        <StyledHeart onClick={props.onClickHeart} src={heartPlus} alt={"polub film"}/>
+        <StyledHeart onClick={props.onClickHeart} src={props.isFavorite ? heartMinus : heartPlus} alt={"polub film"}/>
     )
 }
 

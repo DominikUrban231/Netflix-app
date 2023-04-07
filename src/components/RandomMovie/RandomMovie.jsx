@@ -89,7 +89,7 @@ const RandomMovieWrapper = (props) => {
         });
         setMoviesToDisplay(moviesWithWallpapers);
     }, [moviesLibrary])
-    console.log(randomMovie)
+    // console.log(randomMovie)
 
     return (
         <All>
