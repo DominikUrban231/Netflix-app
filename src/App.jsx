@@ -17,7 +17,7 @@ const All = styled.div`
 const StyledMovieLists = styled.div`
   position: absolute;
   top: 75vh;
-  // background-color: black;
+  width: 100vw;
 `
 
 export const MovieContext = createContext([]);

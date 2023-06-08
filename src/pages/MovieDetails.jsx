@@ -8,8 +8,10 @@ const StyledAll = styled.div`
     width: 60%;
     padding: auto;
     margin: auto;
-    background-color
-`
+    // background-color: Red;
+    color: White;
+    background-color: rgb(20, 20, 20);
+    `
 const StyledImg = styled.div`
     // display: flex;
 `

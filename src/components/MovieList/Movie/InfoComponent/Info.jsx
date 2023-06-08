@@ -15,8 +15,9 @@ const StyledLink = styled(Link)`
     img {
         display: flex;
         height: 80%;
-        padding-inline: 10px;
-        padding-inline: ${props => !props.text ? 'none' : '10px'}
+        // padding-inline: 10px;
+        // padding-inline: ${props => props.text ? '10px' : 'none'}
+
 
     }
     span {

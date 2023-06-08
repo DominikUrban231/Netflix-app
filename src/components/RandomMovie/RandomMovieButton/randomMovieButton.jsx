@@ -19,7 +19,6 @@ const Button = styled.div`
         padding-inline: 10px;
     }
 `
-
 const RandomMovieButton = ({icon, text}) => {
     if(icon && text) {
         return (

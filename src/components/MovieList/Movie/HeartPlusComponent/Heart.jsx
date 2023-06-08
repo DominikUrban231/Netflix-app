@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import heartPlus from '../../../../assets/heartPlus.svg'
-import heartMinus from '../../../../assets/heartMinus.svg'
+import heartPlus from '../../../../assets/heartPlus.svg';
+import heartMinus from '../../../../assets/heartMinus.svg';
 
 const StyledHeart = styled.img`
 background-color: White;
 border-radius: 8px;
 cursor: pointer;
-height: 15%;
-width: auto;
+width: 20%;
+height: auto;
 `
 const Heart = (props) => {
     return (

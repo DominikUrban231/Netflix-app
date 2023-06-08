@@ -17,7 +17,7 @@ const RandomMovie = styled.div`
 const Background = styled.img`
     height: 100vh;
     width: 100%;
-    background-image: url(${avatar})};
+    background-image: url(${avatar});
     background-size: cover;
     background-position: center;
 `
@@ -68,8 +68,7 @@ const RandomMovieWrapper = (props) => {
     useEffect(() => {
         if (moviesToDisplay && moviesToDisplay.length > 0) {
             // const randomNumber = Math.floor(Math.random() * moviesToDisplay.length);
-            const randomNumber = i
-            setRandomMovie(moviesToDisplay[randomNumber]);
+            setRandomMovie(moviesToDisplay[i]);
             i < 4 ? setI(i + 1) : setI(0);
         }
     }, [moviesToDisplay]);

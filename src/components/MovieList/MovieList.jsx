@@ -6,7 +6,6 @@ import styled from "styled-components";
 import arrowLeft from '../../assets/arrow_left.svg'
 import arrowRight from '../../assets/arrow_right.svg'
 
-
 const StyledTitle = styled.h2`
     color: #e5e5e5;
     padding-left: 5%;
@@ -38,93 +37,48 @@ const StyledMovieList = styled.div`
     display: flex;
 `
 const StyledAll = styled.div`
-    width: 100vw;
+    // width: 100vw;
     z-index: 2;
 `
-
 const MovieList = (props) => {
-    const [moviesLibrary, favoriteLibrary] = useContext(MovieContext)
-    const [categoryMovies, setCategoryMovies] = useState([])
-    const [firstMovie, setFirstMovie] = useState(0)
-    const [lastMovie, setLastMovie] = useState(6)
-    const [leftDisabled, setLeftDisabled] = useState(false)
-    const [rightDisabled, setRightDisabled] = useState(false)
-    const [updatedFavoriteMovies, setUpdatedFavoriteMovies] = useState(getFromLocalStorage())
+    const [moviesLibrary, favoriteLibrary] = useContext(MovieContext);
+    const [categoryMovies, setCategoryMovies] = useState([]);
+    const [firstMovie, setFirstMovie] = useState(0);
+    const [lastMovie, setLastMovie] = useState(6);
+    const [leftDisabled, setLeftDisabled] = useState(false);
+    const [rightDisabled, setRightDisabled] = useState(false);
 
-    // const [favoriteMovies, setFavoriteMovies] = useState([])
-    // const [likedMovie, setLikedMovie] = useState()
-
-    // jeśli props.type == favorite, to generuj filmy z całej biblioteki filmów i dodawaj tylko takie, kiedy ID zgadza się z propsem przekazanym z pojedyńczego filmu
-
-    // const handleAddFavoriteMovie = (movie) => {
-    //     console.log("kliknięto w polubienie")
-    //     if (getFromLocalStorage()) {
-    //         setToLocalStorage('favoriteMovies', [...updatedFavoriteMovies, movie])
-    //     } 
-    //     //     setToLocalStorage('favoriteMovies', [movie])
-    //     // }
-    //     // setUpdatedFavoriteMovies(getFromLocalStorage())
-    // }
+    const refreshFavorites = () => {
+        console.log("odświerzono ulubione")
+    };
 
     const previousMovie = () => {
         setFirstMovie(firstMovie - 1)
         setLastMovie(lastMovie - 1)
-    }
+    };
     
     const nextMovie = () => {
         setFirstMovie(firstMovie + 1)
         setLastMovie(lastMovie + 1)
-    }    
+    };
 
     useEffect(() => {
         if(props.type === "Favorite") {
-            setCategoryMovies(getFromLocalStorage("favoriteMovies"))
+            setCategoryMovies(getFromLocalStorage())
         } else {
             setCategoryMovies(moviesLibrary.filter(movie => movie.category.attributes.term == props.type));
-
         }
-    }, [moviesLibrary])
-
-    // useEffect(() => {
-    //     if(lastMovie > favoriteLibrary.length) {
-    //         setLastMovie(1)
-    //     } else {
-    //         console.log("favoriteMovies jest puste")
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     setCategoryMovies(categoryMovies.slice(firstMovie, lastMovie))
-    // }, [])
+    }, [moviesLibrary]);
     
     useEffect(() => {
-        if(firstMovie === 0) {
-            setLeftDisabled(true)
-        } else {
-            setLeftDisabled(false)
-        }
-    }, [firstMovie])
-
+        firstMovie === 0 ? setLeftDisabled(true) : setLeftDisabled(false);
+    }, [firstMovie]);
 
     useEffect(() => {
-        if(lastMovie === categoryMovies.length) {
-            setRightDisabled(true)
-        } else {
-            setRightDisabled(false)
-        }
-    }, [lastMovie])
-
-    // console.log(categoryMovies.length)
-    // console.log("ulubione filmy", categoryMovies)
-    // console.log("kategoria filmów", categoryMovies)
-
-
-    // console.log(props.movie)
-
-
+        lastMovie === categoryMovies.length ? setRightDisabled(true) : setRightDisabled(false);
+    }, [lastMovie]);
 
     if(categoryMovies) {
-        // console.log(categoryMovies)
         return (
             <StyledAll>
                 <StyledTitle>{props.type}</StyledTitle>
@@ -132,12 +86,11 @@ const MovieList = (props) => {
                     <button disabled={leftDisabled} onClick={previousMovie}><img src={arrowLeft} alt="left"/></button>
                     <StyledMovieList>
                         {
-                            categoryMovies.slice(firstMovie, lastMovie).map((movie) => (
+                            categoryMovies.slice(firstMovie, lastMovie).map((movie, index) => (
                                 <Movie
-                                    key={new Date()}
+                                    key={index + new Date()}
                                     movie={movie}
-                                    // onLiked={handleAddFavoriteMovie(movie)}
-                                    // movieId={movie.id.attributes["im:id"]}
+                                    refreshFavorites={refreshFavorites}
                                 />
                             ))
                         }
@@ -146,7 +99,7 @@ const MovieList = (props) => {
                 </StyledSectionWrapper>
             </StyledAll>
         )
-    }
-}
+    };
+};
 
 export default MovieList
